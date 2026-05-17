@@ -195,6 +195,8 @@ export default function App() {
   const [jd, setJd] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [backendConnected, setBackendConnected] = useState(false);
+  const [tryingToConnect,setTryingToConnect] = useState(false);
   const [drag, setDrag] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const analyzerRef = useRef(null);
@@ -206,6 +208,39 @@ export default function App() {
   }, []);
 
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+
+  const checkBackend = async () => {
+
+    try {
+
+      await axios.get(
+        "http://127.0.0.1:8000"
+      );
+
+      setBackendConnected(true);
+
+      setTryingToConnect(false);
+
+    } catch {
+
+      setBackendConnected(false);
+    }
+  };
+
+  checkBackend();
+
+  const interval = setInterval(
+    checkBackend,
+    5000
+  );
+
+  return () =>
+    clearInterval(interval);
+
+}, []);
+
+  
 
   const handleAnalyze = async () => {
     if (!file || !jd) { alert("Please upload a resume and paste a job description."); return; }
@@ -291,7 +326,175 @@ export default function App() {
             <h2 className="section-title">Check your resume now</h2>
             <p className="section-sub" style={{ margin: "0 auto" }}>Paste your details below and get results instantly — no sign-up required.</p>
           </div>
+            {/* Backend Status */}
 
+<div
+  className={`
+  mb-8
+  p-4
+  rounded-2xl
+  border
+  ${
+  tryingToConnect
+    ? "bg-yellow-500/10 border-yellow-500"
+
+    : backendConnected
+
+    ? "bg-green-500/10 border-green-500"
+
+    : "bg-red-500/10 border-red-500"
+}
+`}
+>
+
+{tryingToConnect  ? (
+
+  <div className="
+    flex
+    items-center
+    gap-3
+  ">
+
+    <Loader2
+      size={18}
+      className="
+        animate-spin
+        text-yellow-300
+      "
+    />
+
+    <p className="
+      text-yellow-200
+      font-medium
+    ">
+
+      Connecting to AI Engine...
+
+    </p>
+
+  </div>
+
+) : backendConnected ? (
+
+  <div className="
+    flex
+    items-center
+    gap-3
+  ">
+
+    <div className="
+      w-3
+      h-3
+      rounded-full
+      bg-green-400
+    " />
+
+    <p className="
+      text-green-300
+      font-medium
+    ">
+
+      AI Engine Connected
+
+    </p>
+
+  </div>
+
+) : (
+
+  <div>
+
+    <div className="
+      flex
+      items-center
+      gap-3
+      mb-3
+    ">
+
+      <div className="
+        w-3
+        h-3
+        rounded-full
+        bg-red-400
+      " />
+
+      <p className="
+        text-red-300
+        font-medium
+      ">
+
+        ResumeAI Engine Offline
+
+      </p>
+
+    </div>
+
+    <div className="
+      flex
+      items-center
+      justify-between
+      gap-6
+      mt-4
+    ">
+
+      <div>
+
+        <p className="
+          text-slate-300
+          text-sm
+          leading-6
+          max-w-xl
+        ">
+
+          ResumeAI uses a local AI
+          engine for privacy-first
+          semantic resume analysis.
+
+        </p>
+
+      </div>
+
+      <a
+        href="/ResumeAI-Engine.bat"
+        download
+        onClick={() =>
+  setTryingToConnect(true)
+}
+        className="
+          shrink-0
+          inline-flex
+          items-center
+          gap-2
+          justify-center
+          px-5
+          py-3
+          rounded-xl
+          border
+          border-white/10
+          bg-white/5
+          hover:bg-white/10
+          backdrop-blur-xl
+          text-white
+          font-semibold
+          transition
+        "
+      >
+
+        <Zap size={16} />
+
+        Start AI Engine
+
+      </a>
+
+    </div>
+
+  </div>
+
+)}
+
+
+
+</div>
           <div className="two-col">
             <div className="card">
               <div className="card-label"><FileText size={12} />Resume PDF</div>

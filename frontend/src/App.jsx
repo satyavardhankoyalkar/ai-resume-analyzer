@@ -288,7 +288,7 @@ export default function App() {
         <div className="hero-stats">
           <div className="stat"><div className="stat-num"><span>98</span>%</div><div className="stat-label">Accuracy</div></div>
           <div className="stat-sep" />
-          <div className="stat"><div className="stat-num"><span>2</span>s</div><div className="stat-label">Avg Analysis</div></div>
+          <div className="stat"><div className="stat-num"><span>60</span>s</div><div className="stat-label">Avg Analysis</div></div>
           <div className="stat-sep" />
           <div className="stat"><div className="stat-num"><span>50k</span>+</div><div className="stat-label">Resumes Scanned</div></div>
         </div>

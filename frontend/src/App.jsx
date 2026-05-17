@@ -191,6 +191,7 @@ function scoreMsg(s) {
 }
 
 export default function App() {
+  const isWindows = navigator.userAgent.includes("Windows");
   const [file, setFile] = useState(null);
   const [jd, setJd] = useState("");
   const [result, setResult] = useState(null);
@@ -464,7 +465,7 @@ export default function App() {
     </p>
 
     <p>
-      2. Open the downloaded file
+      2. Run the downloaded setup file
     </p>
 
     <p>
@@ -489,7 +490,11 @@ export default function App() {
 >
 
   <a
-    href="/ResumeAI-Engine.bat"
+    href={
+  isWindows
+    ? "/ResumeAI-Engine.bat"
+    : "/ResumeAI-Engine.sh"
+}
     download
     onClick={() =>
       setTryingToConnect(true)
@@ -515,7 +520,7 @@ export default function App() {
 
     <Zap size={16} />
 
-    Download AI Engine
+    Setup AI Engine
 
   </a>
 
@@ -531,7 +536,15 @@ export default function App() {
     <br />
     No personal data uploaded
 
-  </p>
+  </p><p className="
+  text-[11px]
+  text-slate-600
+  mt-2
+">
+
+  Supports Windows, macOS & Linux
+
+</p>
 
 </div>
 

@@ -290,7 +290,7 @@ export default function App() {
           <div className="stat-sep" />
           <div className="stat"><div className="stat-num"><span>60</span>s</div><div className="stat-label">Avg Analysis</div></div>
           <div className="stat-sep" />
-          <div className="stat"><div className="stat-num"><span>50k</span>+</div><div className="stat-label">Resumes Scanned</div></div>
+          <div className="stat"><div className="stat-num"><span>Local AI Powered</span>+</div><div className="stat-label">Resumes Scanned</div></div>
         </div>
         <div className="scroll-hint"><ChevronDown size={14} />scroll</div>
       </section>
@@ -439,52 +439,101 @@ export default function App() {
 
       <div>
 
-        <p className="
-          text-slate-300
-          text-sm
-          leading-6
-          max-w-xl
-        ">
+  <p className="
+    text-slate-200
+    text-sm
+    leading-7
+    max-w-2xl
+  ">
 
-          ResumeAI uses a local AI
-          engine for privacy-first
-          semantic resume analysis.
+    ResumeAI uses a lightweight
+    local AI engine for secure
+    semantic resume analysis.
 
-        </p>
+  </p>
 
-      </div>
+  <div className="
+    mt-4
+    space-y-2
+    text-sm
+    text-slate-400
+  ">
 
-      <a
-        href="/ResumeAI-Engine.bat"
-        download
-        onClick={() =>
-  setTryingToConnect(true)
-}
-        className="
-          shrink-0
-          inline-flex
-          items-center
-          gap-2
-          justify-center
-          px-5
-          py-3
-          rounded-xl
-          border
-          border-white/10
-          bg-white/5
-          hover:bg-white/10
-          backdrop-blur-xl
-          text-white
-          font-semibold
-          transition
-        "
-      >
+    <p>
+      1. Download the AI Engine
+    </p>
 
-        <Zap size={16} />
+    <p>
+      2. Open the downloaded file
+    </p>
 
-        Start AI Engine
+    <p>
+      3. Initial setup may take ~60 seconds
+    </p>
 
-      </a>
+    <p>
+      4. ResumeAI connects automatically
+    </p>
+
+  </div>
+
+</div>
+
+      <div
+  className="
+    flex
+    flex-col
+    items-center
+    shrink-0
+  "
+>
+
+  <a
+    href="/ResumeAI-Engine.bat"
+    download
+    onClick={() =>
+      setTryingToConnect(true)
+    }
+    className="
+      inline-flex
+      items-center
+      gap-2
+      justify-center
+      px-5
+      py-3
+      rounded-xl
+      border
+      border-white/10
+      bg-white/5
+      hover:bg-white/10
+      backdrop-blur-xl
+      text-white
+      font-semibold
+      transition
+    "
+  >
+
+    <Zap size={16} />
+
+    Download AI Engine
+
+  </a>
+
+  <p className="
+    text-xs
+    text-slate-500
+    mt-3
+    text-center
+    leading-5
+  ">
+
+    Open-source • Runs locally
+    <br />
+    No personal data uploaded
+
+  </p>
+
+</div>
 
     </div>
 
